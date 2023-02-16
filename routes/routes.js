@@ -1,0 +1,42 @@
+const express = require("express");
+const router = express.Router();
+
+router.get("/getNames", (req, res) => {
+    UserName.get((err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred."
+        });
+      else res.send(data);
+    });
+  });
+
+router.post("/postName", (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+  const name = {
+    name: req.body.name,
+  };
+  UserName.create(name, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred.",
+      });
+    else res.send(data);
+  });
+});
+
+router.put("/:id", (req, res) => {
+  res.send("hello");
+});
+
+router.delete("/:id", (req, res) => {
+  res.send("hello");
+});
+
+module.exports = router;
