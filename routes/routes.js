@@ -31,12 +31,5 @@ router.post("/postName", (req, res) => {
   });
 });
 
-router.put("/:id", (req, res) => {
-  res.send("hello");
-});
-
-router.delete("/:id", (req, res) => {
-  res.send("hello");
-});
 
 module.exports = router;
