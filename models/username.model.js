@@ -29,9 +29,6 @@ UserName.create = (newName, result) => {
     });
   };
 
-UserName.update = () => {};
-
-UserName.delete = () => {};
 
 
 module.exports=UserName
