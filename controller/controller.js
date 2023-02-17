@@ -31,3 +31,30 @@ exports.post = (req, res) => {
     }
   });
 };
+
+exports.put = (req, res) => {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.status(400).send({
+      error: true,
+      message: "Please provide all required field",
+    });
+  } else {
+    UserName.put(req.params.id, req.body.name, function (err, queryRes) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send({ error: false, message: "Employee successfully updated" });
+      }
+    });
+  }
+};
+
+exports.delete = (req, res) => {
+  UserName.delete(req.params.id, (err, queryRes) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send({ error: false, message: "Employee successfully deleted" });
+    }
+  });
+};
