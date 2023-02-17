@@ -49,7 +49,11 @@ const updateNameController = (req, res) => {
           message: "Name successfully updated",
         })
       )
-      .catch((err) => res.send(err));
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred.",
+        });
+      });
   }
 };
 
@@ -61,7 +65,11 @@ const deleteNameController = (req, res) => {
         message: "Name Successfully deleted",
       })
     )
-    .catch((err) => res.send(err));
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred.",
+      });
+    });
 };
 
 module.exports = {
