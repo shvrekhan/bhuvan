@@ -1,7 +1,12 @@
-const UserName = require("../models/username.model");
+const {
+  getUserNames,
+  createUserName,
+  updateUserName,
+  deleteUserName,
+} = require("../models/username.model");
 
-exports.get = (req, res) => {
-  UserName.get()
+const getNamesController = (req, res) => {
+  getUserNames()
     .then((data) => {
       res.send(data);
     })
@@ -10,7 +15,7 @@ exports.get = (req, res) => {
     });
 };
 
-exports.post = (req, res) => {
+const createNameController = (req, res) => {
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -19,7 +24,7 @@ exports.post = (req, res) => {
   const newName = {
     name: req.body.name,
   };
-  UserName.create(newName)
+  createUserName(newName)
     .then((data) => {
       res.send(data);
     })
@@ -30,14 +35,14 @@ exports.post = (req, res) => {
     });
 };
 
-exports.put = (req, res) => {
+const updateNameController = (req, res) => {
   if (!req.body || Object.keys(req.body).length === 0) {
     res.status(400).send({
       error: true,
       message: "Content can not be empty!",
     });
   } else {
-    UserName.put(req.params.id, req.body.name)
+    updateUserName(req.params.id, req.body.name)
       .then(() =>
         res.send({
           error: false,
@@ -48,8 +53,8 @@ exports.put = (req, res) => {
   }
 };
 
-exports.delete = (req, res) => {
-  UserName.delete(req.params.id)
+const deleteNameController = (req, res) => {
+  deleteUserName(req.params.id)
     .then(() =>
       res.send({
         error: false,
@@ -57,4 +62,11 @@ exports.delete = (req, res) => {
       })
     )
     .catch((err) => res.send(err));
+};
+
+module.exports = {
+  getNamesController,
+  createNameController,
+  updateNameController,
+  deleteNameController,
 };
