@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const UserName = require("../models/username.model")
 
 router.get("/getNames", (req, res) => {
-    UserName.get((err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred."
-        });
-      else res.send(data);
-    });
+  UserName.get((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred.",
+      });
+    else res.send(data);
   });
-
+});
+ 
 router.post("/postName", (req, res) => {
   if (!req.body) {
     res.status(400).send({
@@ -24,12 +24,10 @@ router.post("/postName", (req, res) => {
   UserName.create(name, (err, data) => {
     if (err)
       res.status(500).send({
-        message:
-          err.message || "Some error occurred.",
+        message: err.message || "Some error occurred.",
       });
     else res.send(data);
   });
 });
-
 
 module.exports = router;
